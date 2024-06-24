@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
 
   search() {
     this.refreshCompanies();
+    this.currentPage = 1;
   }
 
   openExampleModal(id: string) {
