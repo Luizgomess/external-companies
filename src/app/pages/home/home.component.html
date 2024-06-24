@@ -1,0 +1,43 @@
+<main class="root">
+  <section class="content" style="display: flex; flex-direction: column; justify-content: center;">
+    <header class="heading">
+      <h1>Bem vindo!</h1>
+      <h2>Você está na tela de partners</h2>
+      <p>Aqui você consegue gerênciar os parceiros da sua conta</p>
+    </header>
+    <main class="table">
+      <header class="table-heading">
+        <header>
+          <h1>Partners</h1>
+          <button (click)="openChangeModal('create')"><i class="ph ph-plus"></i> Novo Parceiro</button>
+        </header>
+        <section class="filters">
+            <input [(ngModel)]="searchName" id="companyName" placeholder="Digite um nome" finInput>
+          <select id="isActive" [(ngModel)]="searchStatus" finSelect>
+            <option selected value="" disabled>Status</option>
+            <option [value]="true">Ativo</option>
+            <option [value]="false">Inativo</option>
+          </select>
+          <button (click)="search()">Search</button>
+        </section>
+      </header>
+      <main class="table-content" *ngIf="(companies$ | async) as companies">
+        <div *ngFor="let company of companies | slice: (currentPage-1) * pageSize : currentPage * pageSize" finCell>
+          <main>
+            <p>{{ company.id }}</p>
+            <p>{{ company.companyName }}</p>
+            <p>{{ company.collaboratorsCount }}</p>
+            <p>{{ company.isActive }}</p>
+          </main>
+          <footer>
+            <button (click)="openChangeModal('edit', company)">editar</button>
+            <button (click)="openExampleModal(company.id)">deletar</button>
+          </footer>
+        </div>
+      </main>
+      <footer class="table-footer">
+        <pagination [(currentPage)]="currentPage" [total]="total"></pagination>
+      </footer>
+    </main>
+  </section>
+</main>

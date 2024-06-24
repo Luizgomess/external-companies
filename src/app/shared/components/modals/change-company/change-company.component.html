@@ -1,0 +1,26 @@
+<div class="modal-backdrop"></div>
+<main class="modal-content">
+  <h2>{{ action === 'edit' ? 'Edit Company' : 'Create Company' }}</h2>
+<form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+  <h1 *ngIf="submit$ | async"></h1>
+  <div>
+    <label for="companyName">Company Name:</label>
+    <input id="companyName" formControlName="companyName" type="text" />
+  </div>
+
+  <div>
+    <label for="collaboratorsCount">Collaborators Count:</label>
+    <input id="collaboratorsCount" formControlName="collaboratorsCount" type="number" />
+  </div>
+
+  <div>
+    <label for="isActive">Status:</label>
+    <select id="isActive" formControlName="isActive">
+      <option [value]="true">Ativo</option>
+      <option [value]="false">Inativo</option>
+    </select>
+  </div>
+
+  <button type="submit">{{ action === 'edit' ? 'Save Changes' : 'Create Company' }}</button>
+</form>
+</main>
